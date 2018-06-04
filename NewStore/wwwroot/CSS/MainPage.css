@@ -1,0 +1,57 @@
+﻿body {
+}
+
+#slider { height:252px; position:relative; overflow:hidden; }
+#slider-holder { width:720px; height:252px; position:relative; overflow:hidden; }
+#slider-holder .jcarousel-clip{ width:720px; height:252px; position:relative; overflow:hidden; }
+#slider-holder ul{ width:720px; height:252px; position:relative; overflow:hidden; list-style-type: none;}
+#slider-holder ul li{ width:720px; height:252px; position:relative; overflow:hidden; float:left; }
+
+#slider-nav { position:absolute; top:231px; left:644px; z-index:2;}
+#slider-nav a{ font-size:0; line-height:0; text-indent: -4000px; width:10px; height:10px; border:solid 1px #8b0000; background:#8b0000; float:left; margin-right:5px; }
+#slider-nav a:hover,
+#slider-nav a.active { background:#fff;}
+
+#logo {
+    /*float:left;*/
+    position: absolute;
+    top: 50%;
+    left:1%;
+    transform: translate(-1%, -50%)
+}
+#cart {
+    float: right;
+    position: absolute;
+    top: 50%;
+    left: 98%;
+    transform: translate(-98%, -50%)
+}
+nav {
+    float: right;
+    white-space: nowrap; /* блок может содержать не более одной строки */
+
+
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%)
+}
+
+
+
+.sidebar {
+    float: left;
+    width: 200px;
+    /*padding-left: 20px;*/
+    /*position: absolute;
+    top: 0;
+    right: 0;*/
+}
+.good {
+    float: right;
+    height: 200px;
+    /*top: 0;
+    left: 0;
+    position: absolute;*/
+}
+

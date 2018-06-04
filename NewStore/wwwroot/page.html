@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Список пользователей</title>
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <<link href="CSS/GoodsPage.css" rel="stylesheet" />
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <!--<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">-->
+
+    <!--<script>
+        $(document).ready(function () { // вся мaгия пoсле зaгрузки стрaницы
+            $('a#go').click(function (event) { // лoвим клик пo ссылки с id="go"
+                event.preventDefault(); // выключaем стaндaртную рoль элементa
+                $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+                    function () { // пoсле выпoлнения предъидущей aнимaции
+                        $('#modal_form')
+                            .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+                            .animate({ opacity: 1, top: '50%' }, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+                    });
+            });
+            /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+            $('#modal_close, #overlay').click(function () { // лoвим клик пo крестику или пoдлoжке
+                $('#modal_form')
+                    .animate({ opacity: 0, top: '45%' }, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+                    function () { // пoсле aнимaции
+                        $(this).css('display', 'none'); // делaем ему display: none;
+                        $('#overlay').fadeOut(400); // скрывaем пoдлoжку
+                    }
+                    );
+            });
+        });
+    </script>
+
+    <style type="text/css">
+        #modal_form {
+            width: 300px;
+            height: 300px; /* Рaзмеры дoлжны быть фиксирoвaны */
+            border-radius: 5px;
+            border: 3px #000 solid;
+            background: #fff;
+            position: fixed; /* чтoбы oкнo былo в видимoй зoне в любoм месте */
+            top: 45%; /* oтступaем сверху 45%, oстaльные 5% пoдвинет скрипт */
+            left: 50%; /* пoлoвинa экрaнa слевa */
+            margin-top: -150px;
+            margin-left: -150px; /* тут вся мaгия центрoвки css, oтступaем влевo и вверх минус пoлoвину ширины и высoты сooтветственнo =) */
+            display: none; /* в oбычнoм сoстoянии oкнa не дoлжнo быть */
+            opacity: 0; /* пoлнoстью прoзрaчнo для aнимирoвaния */
+            z-index: 5; /* oкнo дoлжнo быть нaибoлее бoльшем слoе */
+            padding: 20px 10px;
+        }
+            /* Кнoпкa зaкрыть для тех ктo в тaнке) */
+            #modal_form #modal_close {
+                width: 21px;
+                height: 21px;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                display: block;
+            }
+        /* Пoдлoжкa */
+        #overlay {
+            z-index: 3; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
+            position: fixed; /* всегдa перекрывaет весь сaйт */
+            background-color: #000; /* чернaя */
+            opacity: 0.8; /* нo немнoгo прoзрaчнa */
+            filter: alpha(opacity=80);
+            width: 100%;
+            height: 100%; /* рaзмерoм вo весь экрaн */
+            top: 0; /* сверху и слевa 0, oбязaтельные свoйствa! */
+            left: 0;
+            cursor: pointer;
+            display: none; /* в oбычнoм сoстoянии её нет) */
+        }
+    </style>-->
+
+</head>
+<body>
+    <!--<div id="modal1" class="modal_div">
+                <span class="modal_close">X</span>
+    </div>
+    <a href="#modal1" class="open_modal">oткрыть мoдaльнoе oкнo modal1</a>
+    <div id="overlay"></div>-->
+
+
+    <h2>Список пользователей</h2>
+    <form enctype="multipart/form-data" name="userForm">
+        <input name="objectId" value="0" />
+        <div class="form-group">
+            <label for="name">Имя:</label>
+            <input class="form-control" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="price">Цена:</label>
+            <input class="form-control" name="price" />
+        </div>
+        <div class="form-group">
+            <label for="availability">Кол-во на складе:</label>
+            <input class="form-control" name="availability" />
+        </div>
+        <div class="form-group">
+            <label for="manufacturerId">Id производителя:</label>
+            <input class="form-control" name="manufacturerId" />
+        </div>
+        <div class="form-group">
+            <label for="typeId">Id типа:</label>
+            <input class="form-control" name="typeId" />
+        </div>
+
+        <!--<div class="form-group">
+            <label for="image">Картинка:</label>
+            <input type="file" class="form-control" name="image" />
+        </div>-->
+
+        <div class="panel-body">
+            <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
+            <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+        </div>
+
+
+
+    </form>
+    <table class="table table-condensed table-striped table-bordered">
+        <thead><tr><th>Id</th><th>Название</th><th>Цена</th><th>Кол-во на складе</th><th>Производитель</th><th>Тип</th><th>Классификация</th><th></th></tr></thead>
+        <tbody></tbody>
+    </table>
+    <!--<div class="wraper">
+
+        <ul class="products clearfix">
+            <li class="product-wrapper">
+                <a href="" class="product"></a>
+
+            </li>
+            <li class="product-wrapper">
+                <a href="" class="product">
+                    <div class="product-main">
+                        <div class="product-photo">
+                            <img src="images/example.png" alt="">
+                        </div>
+
+                        <p>
+                            Описание товара
+                            Описание товара
+                        </p>
+                    </div>
+                </a>
+
+            </li>
+            <li class="product-wrapper">
+                <a href="" class="product"></a>
+            </li>
+            <li class="product-wrapper">
+                <a href="" class="product"></a>
+            </li>
+            <li class="product-wrapper">
+                <a href="" class="product"></a>
+            </li>
+            <li class="product-wrapper">
+                <a href="" class="product"></a>
+            </li>
+            <li class="product-wrapper">
+                <a href="" class="product"></a>
+            </li>
+            <li class="product-wrapper">
+                <a href="" class="product"></a>
+            </li>
+        </ul>
+
+    </div>-->
+
+
+    <script>
+
+        //// Получение имя типа по Id
+        //var Type = function GetType(id) {
+        //    var ret;
+        //    $.ajax({
+        //        url: '/api/types/' + id,
+        //        type: 'GET',
+        //        contentType: "application/json",
+        //        success: function (orderobject) {
+        //            ret = orderobject.name;
+        //            //var form = document.forms["userForm"];
+        //            //form.elements["objectId"].value = orderobject.objectId;
+        //            //form.elements["name"].value = orderobject.name;
+        //            //form.elements["price"].value = orderobject.price;
+        //        }
+        //    });
+
+        //    return ret;
+        //}
+
+
+
+        // Получение всех пользователей
+        function GetUsers() {
+            $.ajax({
+                url: '/api/orderobjects',
+                type: 'GET',
+                contentType: "application/json",
+                success: function (orderobjects) {
+                    var rows = "";
+                    $.each(orderobjects, function (index, orderobject) {
+                        // добавляем полученные элементы в таблицу
+                        rows += row(orderobject);
+                    })
+                    $("table tbody").append(rows);
+                }
+            });
+        }
+        // Получение одного пользователя
+        function GetUser(id) {
+            $.ajax({
+                url: '/api/OrderObjects/' + id,
+                type: 'GET',
+                contentType: "application/json",
+                success: function (orderobject) {
+                    document.forms["userForm"];
+                    form.elements["objectId"].value = orderobject.objectId;
+                    form.elements["name"].value = orderobject.name;
+                    form.elements["price"].value = orderobject.price;
+                    form.elements["availability"].value = orderobject.availability;
+                    form.elements["manufacturerId"].value = orderobject.manufacturerId;
+                    form.elements["typeId"].value = orderobject.typeId;
+                }
+            });
+        }
+        // Добавление объект
+        function CreateUser(objName, objPrice, objAvailability, objManufacturerId, objTypeId/*, objImage*/) {
+            $.ajax({
+                url: "api/OrderObjects",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    name: objName,
+                    price: objPrice,
+                    availability: objAvailability,
+                    manufacturerId: objManufacturerId,
+                    typeId: objTypeId//,
+                    //image: objImage
+
+                    //name: userName,
+                    //age: userAge
+                }),
+                success: function (obj) {
+                    reset();
+                    $("table tbody").append(row(obj));
+                }
+            })
+        }
+
+
+        // Изменение пользователя
+        function EditUser(objId, objName, objPrice, objAvailability, objManufacturerId, objTypeId) {
+            $.ajax({
+                url: "/api/OrderObjects",
+                contentType: "application/json",
+                method: "PUT",
+                data: JSON.stringify({
+                    objectId: objId,
+                    name: objName,
+                    price: objPrice,
+                    availability: objAvailability,
+                    manufacturerId: objManufacturerId,
+                    typeId: objTypeId
+                }),
+                success: function (obj) {
+                    reset();
+                    $("tr[data-rowid='" + obj.objectId + "']").replaceWith(row(obj));
+                }
+            })
+        }
+
+        // сброс формы
+        function reset() {
+            var form = document.forms["userForm"];
+            form.reset();
+            form.elements["objectId"].value = 0;
+        }
+
+        // Удаление пользователя
+        function DeleteUser(id) {
+            //$.ajax({
+            //    url: "api/OrderObjects/" + objectId,
+            //    contentType: "application/json",
+            //    type: "DELETE",
+            //    success: function (obj) {
+            //        $("tr[data-rowid='" + obj.objectId + "']").remove();
+            //    }
+            //})
+            var request = new XMLHttpRequest();
+            request.onload = function (ev) {
+                var msg = ""
+                if (request.status == 401) {
+                    msg = "У вас не хватает прав для удаления";
+                } else if ((request.status == 200) || (request.status== 204)) {
+                    msg = "Запись удалена";
+                } else {
+                    msg = "Неизвестная ошибка";
+                }
+                document.getElementById("msgDel").innerHTML = msg;
+            }
+            //select = document.getElementById("deleteDiv");
+            //id = select.options[select.selectedIndex].value;
+            url = "/api/OrderObjects/" + id;
+            request.open("DELETE", url, false);
+            request.send();
+        }
+            
+
+
+
+        // создание строки для таблицы
+        var row = function (orderobject) {
+            return "<tr data-rowid='" + orderobject.objectId + "'>" +
+                "<td>" + orderobject.objectId + "</td>" +
+                "<td>" + orderobject.name + "</td>" +
+                "<td>" + orderobject.price + "</td>" +
+                "<td>" + orderobject.availability + "</td>" +
+                "<td>" + orderobject.manufacturer.name + "</td>" +
+                "<td>" + orderobject.type.name + "</td>" +
+                "<td>" + orderobject.type.name + "</td>" +
+
+                /*<button class='editLink' data-id='" + orderobject.objectId + "'>Изменить</button> | */
+
+                "<td>" +
+                "<button class='removeLink' data-id='" + orderobject.objectId + "'>Удалить</button></td></tr>";
+        }
+        // сброс значений формы
+        $("#reset").click(function (e) {
+
+            e.preventDefault();
+            reset();
+        })
+
+        // отправка формы
+        $("form").submit(function (e) {
+            e.preventDefault();
+            var id = this.elements["objectId"].value;
+            var name = this.elements["name"].value;
+            var price = this.elements["price"].value;
+            var availability = this.elements["availability"].value;
+            var manufacturerId = this.elements["manufacturerId"].value;
+            var typeId = this.elements["typeId"].value;
+            //var image = this.elements["image"].value;
+            if (id == 0) {
+                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
+                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
+                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
+                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
+                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
+            }
+            else
+                EditUser(id, name, price, availability, manufacturerId, typeId);
+        });
+
+        // нажимаем на ссылку Изменить
+        $("body").on("click", ".editLink", function () {
+            var id = $(this).data("id");
+            GetUser(id);
+        })
+        // нажимаем на ссылку Удалить
+        $("body").on("click", ".removeLink", function () {
+            var id = $(this).data("id");
+            DeleteUser(id);
+        })
+
+
+
+
+
+
+
+        // загрузка пользователей
+        GetUsers();
+        //CreateUser("24", "gthzfj", "998", "777", "1", "1");
+
+    </script>
+
+    <script src="JS/AddGoodsModal.js"></script>
+
+    <h3>Вход для зарегистрированных пользователей</h3>
+    <form class="adding">
+        <label id="msgDel"></label>
+        <div class="msgClass">
+            <div id="msg"></div>
+            <ul id="formError"></ul>
+        </div>
+        <div>
+            <label for="">Email: </label><br />
+            <input type="text" id="Email" name="Email">
+        </div>
+        <div>
+            <label for="">Пароль: </label><br />
+            <input type="password" id="Password" name="Password">
+        </div>
+        <div>
+            <button type="button" id="loginBtn" name="loginBtn">Авторизоваться </button>
+            <button type="button" id="loginOut" name="loginOut">Выйти </button>
+        </div>
+    </form>
+
+    <form>
+        <div class="msgClass">
+            <div id="msgAuth"></div>
+            <div id="msg"></div>
+            <ul id="formError"></ul>
+        </div>
+    </form>
+
+    <script>
+        function ParseResponseMsg() {
+            // Считывание данных с формы
+            email = document.getElementById("Email").value;
+            password = document.getElementById("Password").value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/Account/Login");
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.onreadystatechange = function () {
+                // Очистка контейнера вывода сообщений
+                document.getElementById("msgDel").innerHTML = ""
+                var mydiv = document.getElementById('formError');
+                while (mydiv.firstChild) {
+                    mydiv.removeChild(mydiv.firstChild);
+                }
+                // Обработка ответа от сервера
+                myObj = JSON.parse(this.responseText);
+                document.getElementById("msgDel").innerHTML = myObj.message;
+                // Вывод сообщений об ошибках
+                if (typeof myObj.error !== "undefined" && myObj.error.length > 0) {
+                    for (var i = 0; i < myObj.error.length; i++) {
+                        var ul = document.getElementsByTagName("ul");
+                        var li = document.createElement("li");
+                        li.appendChild(document.createTextNode(myObj.error[i]));
+                        ul[0].appendChild(li);
+                    }
+                }
+                document.getElementById("Password").value = "";
+                
+            };
+            // Запрос на сервер
+            xmlhttp.send(JSON.stringify({
+                email: email,
+                password: password
+            }));
+        };
+
+
+        //Выход из профиля 
+        function LogOff() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/Account/LogOff", true); //http://localhost:13807
+
+            xmlhttp.onreadystatechange = function () {
+                document.getElementById("msgAuth").innerHTML = "Вы гость."
+                //document.getElementById("loginButton").innerHTML = "<a class='btn btn-outline' href='#' data-toggle='modal' data-target='#autorizModal'>Войти</a>";
+            }
+            xmlhttp.send();
+        }
+
+        function LogIN() {
+            ParseResponseMsg();
+            GetCurrentUser();
+        }
+
+        // Обработка клика по кнопке
+        document.getElementById("loginBtn").addEventListener("click", LogIN);
+        document.getElementById("loginOut").addEventListener("click", LogOff);
+
+        function GetCurrentUser() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/Account/isAuthenticated", true);
+            xmlhttp.onreadystatechange = function () {
+                var myObj = "";
+                myObj = xmlhttp.responseText != "" ? JSON.parse(xmlhttp.responseText) : {};
+                document.getElementById("msgAuth").innerHTML = myObj.message;
+            }
+            xmlhttp.send();
+        }
+
+        GetCurrentUser();
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿body {
+    background-color:grey;
+}
+
+header {
+    height: 70px;
+    /*background: url(images/header.gif);*/
+    background-color: aquamarine;
+    position: relative;
+}
+
+footer {
+    background-color: cornflowerblue;
+    height: 70px;
+    white-space: nowrap;
+    /*margin-top: 10px;
+    position: relative;
+    padding: 20px 15px;*/
+
+    clear:both;
+
+}
+
+.right {
+    float:right;
+    /*padding-bottom:20px;*/
+    padding-right:20px;
+    padding-top:10px;
+}
+
+.left {
+    float: left;
+    white-space: pre-wrap;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+
+
+main {
+    /*height: 450px;*/
+    padding: 10px 0 0 0;
+    position: relative;
+}
+
+body {
+    font-family: Menlo, Consolas, monospace;
+    color: #444;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ul {
+    width: 180px; /* Ширина меню */
+    list-style: none; /* Для списка убираем маркеры */
+    margin: 0; /* Нет отступов вокруг */
+    padding: 0; /* Убираем поля вокруг текста */
+    font-family: Arial, sans-serif; /* Рубленый шрифт для текста меню */
+    font-size: 10pt; /* Размер названий в пункте меню */
+}
+
+li ul {
+    position: absolute; /* Подменю позиционируются абсолютно */
+    display: none; /* Скрываем подменю */
+    margin-left: 165px; /* Сдвигаем подменю вправо */
+    margin-top: -2em; /* Сдвигаем подменю вверх */
+}
+
+li a {
+    display: block; /* Ссылка как блочный элемент */
+    padding: 5px; /* Поля вокруг надписи */
+    text-decoration: none; /* Подчеркивание у ссылок убираем */
+    color: #666; /* Цвет текста */
+    border: 1px solid #ccc; /* Рамка вокруг пунктов меню */
+    background-color: #f0f0f0; /* Цвет фона */
+    border-bottom: none; /* Границу снизу не проводим */
+}
+
+    li a:hover {
+        color: #ffe; /* Цвет текста активного пункта */
+        background-color: #5488af; /* Цвет фона активного пункта */
+    }
+
+li:hover ul {
+    display: block; /* При выделении пункта курсором мыши отображается подменю */
+}
+
+.brd {
+    border-bottom: 1px solid #ccc; /* Линия снизу */
+}

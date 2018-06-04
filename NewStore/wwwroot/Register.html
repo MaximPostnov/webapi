@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Регистрация нового пользователя</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+        .login-page {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+        }
+
+        .register-form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            max-width: 360px;
+            margin: 0 auto 100px;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+            #Email {
+                font-family: "Roboto", sans-serif;
+                outline: 0;
+                background: #f2f2f2;
+                width: 100%;
+                border: 0;
+                margin: 0 0 15px;
+                padding: 15px;
+                box-sizing: border-box;
+                font-size: 14px;
+            }
+        #Password {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        #PasswordConfirm {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        #registerBtn {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #4CAF50;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
+
+            #registerBtn:hover, #registerBtn:active, #registerBtn:focus {
+                background: #43A047;
+            }
+
+            .form .message {
+                margin: 15px 0 0;
+                color: #b3b3b3;
+                font-size: 12px;
+            }
+
+                .form .message a {
+                    color: #4CAF50;
+                    text-decoration: none;
+                }
+
+            .form .register-form {
+                display: none;
+            }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+            .container:before, .container:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            .container .info {
+                margin: 50px auto;
+                text-align: center;
+            }
+
+                .container .info h1 {
+                    margin: 0 0 15px;
+                    padding: 0;
+                    font-size: 36px;
+                    font-weight: 300;
+                    color: #1a1a1a;
+                }
+
+                .container .info span {
+                    color: #4d4d4d;
+                    font-size: 12px;
+                }
+
+                    .container .info span a {
+                        color: #000000;
+                        text-decoration: none;
+                    }
+
+                    .container .info span .fa {
+                        color: #EF3B3A;
+                    }
+
+        body {
+            background: #76b852; /* fallback for old browsers */
+            background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+            background: -moz-linear-gradient(right, #76b852, #8DC26F);
+            background: -o-linear-gradient(right, #76b852, #8DC26F);
+            background: linear-gradient(to left, #76b852, #8DC26F);
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body>
+
+    <form class="register-form">
+        <h2>Регистрация нового пользователя</h2>
+        <input id="Email" type="text" placeholder="Email" />
+        <input id="Password" type="password" placeholder="Пароль" />
+        <input type="password" id="PasswordConfirm" name="PasswordConfirm" placeholder="Подтверждение пароля">
+        <button id="registerBtn">Регистрация</button>
+        <div class="msgClass">
+            <div id="msg"></div>
+            <ul id="formError"></ul>
+        </div>
+    </form>
+
+
+    <!--<form>
+        <div class="msgClass">
+            <div id="msg"></div>
+            <ul id="formError"></ul>
+        </div>
+        <div>
+            <label for="">Email: </label><br />
+            <input type="text" id="Email" name="Email">
+        </div>
+        <div>
+            <label for="">Пароль: </label><br />
+            <input type="password" id="Password" name="Password">
+        </div>
+        <div>
+            <label for="">Подтверждение пароля: </label><br />
+            <input type="password" id="PasswordConfirm" name="PasswordConfirm">
+        </div>
+    </form>
+   
+    <button id="registerBtn">Регистрация</button>-->
+    <script>
+        function ParseResponseMsg() {
+            // Считывание данных с формы
+            email = document.getElementById("Email").value;
+            password = document.getElementById("Password").value;
+            passwordConfirm = document.getElementById("PasswordConfirm").value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/account/Register");
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.onreadystatechange = function () {
+                // Очистка контейнера вывода сообщений
+                document.getElementById("msg").innerHTML = ""
+                var mydiv = document.getElementById('formError');
+                while (mydiv.firstChild) {
+                    mydiv.removeChild(mydiv.firstChild);
+                }
+                // Обработка ответа от сервера
+                myObj = JSON.parse(this.responseText);
+                document.getElementById("msg").innerHTML = myObj.message;
+                // Вывод сообщений об ошибках
+                if (myObj.error.length > 0) {
+                    for (var i = 0; i < myObj.error.length; i++) {
+                        var ul = document.getElementsByTagName("ul");
+                        var li = document.createElement("li");
+                        li.appendChild(document.createTextNode(myObj.error[i]));
+                        ul[0].appendChild(li);
+                    }
+                }
+                // Очистка полей поролей
+                document.getElementById("Password").value = "";
+                document.getElementById("PasswordConfirm").value = "";
+            };
+            // Запрос на сервер
+            xmlhttp.send(JSON.stringify({
+                email: email,
+                password: password,
+                passwordConfirm: passwordConfirm
+            }));
+        };
+        // Обработка клика по кнопке
+        document.getElementById("registerBtn").addEventListener("click", ParseResponseMsg);
+    </script>
+</body>
+</html>
