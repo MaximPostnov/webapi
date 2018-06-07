@@ -129,14 +129,101 @@
                 box-shadow: 0 3px rgb(33,147,90) inset;
             }
     </style>
+
+    <style>
+        .in_basket {
+            background-color: #fff;
+            display: block;
+            position: relative;
+            height: 140px;
+            /*height: 80px;*/
+        }
+
+        .product_in_basket {
+            margin: 0 50px 0 0;
+        }
+
+        .itogodiv {
+            background-color: #fff;
+            display: block;
+            position: relative;
+            height: 80px;
+            margin: 0 50px 0 0;
+        }
+
+        .itogo {
+            margin: 0 0 0 0;
+        }
+
+        .img_in_basket {
+            width: 120px;
+            height: 120px;
+            padding: 10px;
+            float: left;
+        }
+
+        .pl_min {
+            padding: 10px;
+            float: left;
+        }
+
+        .but_pl_min {
+            width: 30px;
+            height: 30px;
+        }
+
+        .count {
+            position: relative;
+        }
+
+        .opisanie {
+            width: 17%;
+            padding-left: 40px;
+            height: 120px;
+            float: left;
+        }
+
+        .count {
+            width: 30%;
+            padding-left: 40px;
+            height: 120px;
+            float: left;
+            padding-top: 40px;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #Bas_header {
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #b5e9a7;
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+        .products {
+            list-style: none;
+            margin: 0 -50px 150px 0;
+            padding: 0;
+        }
+        .button_in_basket {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: none;
+            float: left;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <div id="header">
-        <h1 id="logo"><a href="#">ЛОГО</a></h1>
+        <h1 id="logo"><a href="homepage.html">ЛОГО</a></h1>
 
         <div id="profile">
-            <div id ="profileId" style="display:none;"></div>
+            <div id="profileId" style="display:none;"></div>
             <div id="msgAuth"></div>
             <div class="cl">&nbsp;</div>
             <button class="butAuth" onClick="getElementById('win').removeAttribute('style');" type="button">Авторизоваться</button>
@@ -173,10 +260,6 @@
         <!-- Cart -->
         <div id="cart">
             <a href="cart.html" class="cart-link">Корзина</a>
-            <div class="cl">&nbsp;</div>
-            <span>Кол-во товаров <strong>10</strong></span>
-            &nbsp;&nbsp;
-            <span>Стоимость: <strong>рубли</strong></span>
         </div>
         <!-- End Cart -->
         <!-- Navigation -->
@@ -199,8 +282,10 @@
 
 
     <div id="main">
-        <ul class="cart_clearfix"></ul>
+        <!--<ul class="cart_clearfix"></ul>-->
     </div>
+
+   
 
 
     <!-- Footer -->
@@ -300,13 +385,14 @@
                 type: 'GET',
                 contentType: "application/json",
                 success: function (orders) {
-                    var rows = "";
-                    $.each(orders, function (index, order) {
+                    //var rows = "";
+                    $("#main").empty();
+                    $("#main").append(orders);
+                    //$.each(orders, function (index, order) {
                         // добавляем полученные элементы в таблицу
-                        rows += row(order);
-                    })
-                    $(".cart_clearfix").empty();
-                    $(".cart_clearfix").append(rows);
+                        //rows += row(order);
+                    //})
+                    
                 }
             });
         }

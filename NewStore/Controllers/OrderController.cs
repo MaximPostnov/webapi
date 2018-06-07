@@ -42,22 +42,50 @@ namespace NewStore.Controllers
 
         //GET: api/Order/5
         [HttpGet("{id}", Name = "GetOrder")]
-        public IActionResult GetById(string id)
+        public string GetById(string id)
         {
-            List<Order> item = new List<Order>();
+            string STR = "";
+
+            //List<Order> item = new List<Order>();
             _context.Order.Load();
             foreach(Order od in _context.Order.Include(obj => obj.OrderLine))
             {
                 if (od.UserId == id)
                 {
-                    item.Add(od);
+                    STR += "<div class='wrapper'><div id='Bas_header'><div class='layout-buttons'></div><h1 style = 'text-align:center;'> Корзина покупок id:" + od.OrderId;
+                    if(od.SoldOut)
+                        STR += " Закрыт</h1><nav></nav></div>";
+                    else STR += " Открыт</h1><nav></nav></div>";
+                    double price = 0;
+                    STR+= "<ul class='products clearfix'>";
+                    foreach (OrderLine line in _context.OrderLine.Include(obj => obj.Object))
+                    {
+                        if(line.OrderId==od.OrderId)
+                        {
+                            var Ob = _context.OrderObject.Include(obj => obj.Manufacturer).Include(obj => obj.Type).FirstOrDefault(t => t.ObjectId == line.ObjectId);
+                            STR += "<li class='product_in_basket'>" +
+                                "<div class='in_basket'>" +
+                                "<img class='img_in_basket' src='../images/Товары/" + Ob.Image + "' alt='Фото отсутствует'>" +
+                                "<div class='opisanie'> <h2>" + Ob.Name + "</h2>" +
+                                "Производитель: "+ Ob.Manufacturer.Name +"<br>" +
+                                "Тип: " + Ob.Type.Name + "<br>" +
+                                "<b> Цена за штуку: " + Ob.Price + "</b></div>" +
+                                //"<div class='count'>" +
+                                //"<div style='width:20%; padding-left:20px; height:120px; float:left; font-size:50px;'>" + line.Amount + "</div>"+
+                                //"</div>" +
+                                "<div class='count' style ='font-size:30px; float:right; padding-top:10px; padding-right:70px;'>" +
+                                "Кол-во: " + line.Amount + " шт.</div>";
+                            price += line.Object.Price;
+                        }
+                    }
+                    STR += "<li class='itogo'>" +
+                        "<div class='itogodiv'><div class='opisanie'>" +
+                        "<h3>Дата</h3>" + od.Date.Day +"." + od.Date.Month + "." + od.Date.Year + "</div>" +
+                        "<div style ='font-size:50px; float:right; padding-top:10px; padding-right:70px;'>" +
+                        "Итого: " + price + "₽</div></div></li></ul></div>";
                 }
             }
-            if (item.Count == 0)
-            {
-                return NotFound();
-            }
-            return new ObjectResult(item);
+            return STR;
         }
         //b4bd6f72-4954-4a61-a0c8-f1da820f9c1d 23
         //ee723a5c-4f3d-4c96-8fc9-19961257d1af
