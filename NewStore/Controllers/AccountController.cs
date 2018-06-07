@@ -33,7 +33,7 @@ namespace NewStore.Controllers
                 {
                     var msg = new
                     {
-                        message = "Выполнен вход пользователем: " + model.Email
+                        message = "Вы вошли как: " + model.Email
                     };
                     return Ok(msg);
                 }
@@ -130,6 +130,24 @@ namespace NewStore.Controllers
         {
             UserReg usr = await GetCurrentUserAsync();
             var message = usr == null ? "Вы Гость. Пожалуйста, выполните вход." : "Вы вошли как: " + usr.UserName;
+            var msg = new
+            {
+                message
+            };
+            return Ok(msg);
+        }
+
+
+        [HttpPost]
+        [Route("api/Account/isAuthenticatedId")]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogisAuthenticatedOffId()
+        {
+            UserReg usr = await GetCurrentUserAsync();
+            //var message = usr == null ? "Вы Гость. Пожалуйста, выполните вход." : "Вы вошли как: " + usr.UserName;
+
+
+            var message = usr == null ? null : usr.Id;
             var msg = new
             {
                 message

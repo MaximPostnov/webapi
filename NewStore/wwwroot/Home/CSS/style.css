@@ -44,7 +44,6 @@ h1#logo a{ display:block; height:64px; text-indent: -4000px; background:url(Imag
 #navigation ul li a.active,
 #navigation ul li a:hover{ background:#fff; color:#8b0000; }
 
-#cart { float:right; width:300px; top:0; right:0; height:51px; background:#19c819; color:#fff; padding:13px 10px 0 10px; white-space:nowrap; line-height:20px;}
 a.cart-link { color:#fff; background:url(Images/cart.gif) no-repeat 0 0; padding:0 0 0 32px; text-decoration: none;}
 a.cart-link:hover { text-decoration: underline;}
 

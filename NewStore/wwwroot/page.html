@@ -109,10 +109,10 @@
             <input class="form-control" name="typeId" />
         </div>
 
-        <!--<div class="form-group">
-            <label for="image">Картинка:</label>
-            <input type="file" class="form-control" name="image" />
-        </div>-->
+        <div class="form-group">
+            <label for="image">Название картинки:</label>
+            <input class="form-control" name="image" />
+        </div>
 
         <div class="panel-body">
             <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
@@ -228,7 +228,7 @@
             });
         }
         // Добавление объект
-        function CreateUser(objName, objPrice, objAvailability, objManufacturerId, objTypeId/*, objImage*/) {
+        function CreateUser(objName, objPrice, objAvailability, objManufacturerId, objTypeId, objImage) {
             $.ajax({
                 url: "api/OrderObjects",
                 contentType: "application/json",
@@ -238,8 +238,8 @@
                     price: objPrice,
                     availability: objAvailability,
                     manufacturerId: objManufacturerId,
-                    typeId: objTypeId//,
-                    //image: objImage
+                    typeId: objTypeId,
+                    image: objImage
 
                     //name: userName,
                     //age: userAge
@@ -344,13 +344,13 @@
             var availability = this.elements["availability"].value;
             var manufacturerId = this.elements["manufacturerId"].value;
             var typeId = this.elements["typeId"].value;
-            //var image = this.elements["image"].value;
+            var image = this.elements["image"].value;
             if (id == 0) {
-                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
-                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
-                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
-                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
-                CreateUser(name, price, availability, manufacturerId, typeId/*, image*/);
+                CreateUser(name, price, availability, manufacturerId, typeId, image);
+                CreateUser(name, price, availability, manufacturerId, typeId, image);
+                CreateUser(name, price, availability, manufacturerId, typeId, image);
+                CreateUser(name, price, availability, manufacturerId, typeId, image);
+                CreateUser(name, price, availability, manufacturerId, typeId, image);
             }
             else
                 EditUser(id, name, price, availability, manufacturerId, typeId);

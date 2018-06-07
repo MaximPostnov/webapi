@@ -15,7 +15,7 @@
     <script src="js/jquery.jcarousel.pack.js" type="text/javascript"></script>
     <script src="js/jquery-func.js" type="text/javascript"></script>
     <!-- End JS -->
-
+    
     <style>
         .shell {
             background: #fff;
@@ -24,7 +24,7 @@
         }
         #content {
             float: left;
-            width: 1000px;
+            width: 1005px;
             padding: 10px;
             position: relative
         }
@@ -34,6 +34,100 @@
             padding:10px;
 
         }
+        #cart {
+            float: right;
+            width: 220px;
+            top: 0;
+            right: 0;
+            height: 51px;
+            background: #19c819;
+            color: #fff;
+            padding: 13px 10px 0 10px;
+            white-space: nowrap;
+            line-height: 20px;
+        }
+
+        #profile {
+            float: right;
+            width: 220px;
+            top: 0;
+            right: 0;
+            height: 51px;
+            background: #19c819;
+            color: #fff;
+            padding: 13px 10px 0 10px;
+            white-space: nowrap;
+            line-height: 20px;
+        }
+
+
+        .overlay {
+            background: #000;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1000;
+            opacity: .5;
+        }
+
+        .visible {
+            background: #fff;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            overflow: hidden;
+            z-index: 2000;
+            width: 300px;
+            padding: 0px;
+            margin-left: -100px;
+        }
+
+        #closeBt {
+            float: right;
+            line-height: 20px;
+            margin: 1.2em;
+            border: none;
+            background: transparent;
+            color: blue;
+        }
+
+            #win button[type="button"]:hover {
+                cursor: pointer;
+                color: navy;
+                text-decoration: underline;
+            }
+
+        #win h3 {
+            text-align: center;
+            color: #555;
+        }
+
+        .contentmodal {
+            padding: 0 1em;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            background: WhiteSmoke;
+        }
+        .butAuth {
+            font-weight: 200;
+            color: white;
+            text-decoration: none;
+            padding: 3px;
+            border-radius: 3px;
+            background: rgb(64,199,129);
+            box-shadow: 0 -3px rgb(53,167,110) inset;
+            transition: 0.2s;
+        }
+            .butAuth:hover {
+                background: rgb(53, 167, 110);
+            }
+            .butAuth:active {
+                background: rgb(33,147,90);
+                box-shadow: 0 3px rgb(33,147,90) inset;
+            }
     </style>
 </head>
 <body>
@@ -45,9 +139,44 @@
         <div id="header">
             <h1 id="logo"><a href="#">ЛОГО</a></h1>
 
+            <div id="profile">
+                <div id="profileId" style="display:none;"></div>
+                <div id="msgAuth"></div>
+                <div class="cl">&nbsp;</div>
+                <button class="butAuth" onClick="getElementById('win').removeAttribute('style');" type="button">Авторизоваться</button>
+                &nbsp;&nbsp;
+                <span><button class="butAuth" type="button" id="loginOut" name="loginOut">Выйти </button></span>
+            </div>
+
+            <!---Modal details-->
+            <div id="win" style="display:none;">
+                <div class="overlay"></div>
+                <div class="visible">
+                    <h2>Авторизация</h2>
+                    <div class="contentmodal">
+                        <div>
+                            <label for="">Email: </label><br />
+                            <input type="text" id="Email" name="Email" />
+                        </div>
+                        <div>
+                            <label for="">Пароль: </label><br />
+                            <input type="password" id="Password" name="Password" />
+                        </div>
+                        <div>
+                            <label for=""> </label><br />
+                            <button type="button" id="loginBtn" name="loginBtn" onClick="getElementById('win').style.display='none';">Авторизоваться </button>
+                            <label for=""> </label><br />
+                            <a href="../Register.html">Регистрация</a>
+                        </div>
+                    </div>
+
+                    <button id="closeBt" type="button" onClick="getElementById('win').style.display='none';">закрыть</button>
+                </div>
+            </div>
+            <!--End Modal details-->
             <!-- Cart -->
             <div id="cart">
-                <a href="#" class="cart-link">Корзина</a>
+                <a href="cart.html" class="cart-link">Корзина</a>
                 <div class="cl">&nbsp;</div>
                 <span>Кол-во товаров <strong>10</strong></span>
                 &nbsp;&nbsp;
@@ -66,7 +195,7 @@
             </div>
             <!-- End Navigation -->
 
-            
+
 
         </div>
         <!-- End Header -->
@@ -100,10 +229,10 @@
                 <div id="slider" class="box">
                     <div id="slider-holder">
                         <ul>
-                            <li><a href="#"><img src="CSS/Images/slide.jpg" alt="" /></a></li>
-                            <li><a href="#"><img src="CSS/Images/slide.jpg" alt="" /></a></li>
-                            <li><a href="#"><img src="CSS/Images/slide.jpg" alt="" /></a></li>
-                            <li><a href="#"><img src="CSS/Images/example.png" alt="" /></a></li>
+                            <li><a href="#"><img src="../images/слайды/1.bmp" alt="" /></a></li>
+                            <li><a href="#"><img src="../images/слайды/2.bmp" alt="" /></a></li>
+                            <li><a href="#"><img src="../images/слайды/3.bmp" alt="" /></a></li>
+                            <li><a href="#"><img src="../images/слайды/4.bmp" alt="" /></a></li>
                         </ul>
                     </div>
                     <div id="slider-nav">
@@ -251,7 +380,6 @@
             </p>
         </div>
         <!-- End Footer -->
-
     </div>
     <!-- End Shell -->
 
@@ -272,6 +400,25 @@
     </script>-->
 
     <script>
+        function AddToCart(id) {
+            $.ajax({
+                url: '/api/Order/' + document.getElementById("profileId").innerHTML,
+                type: 'GET',
+                contentType: "application/json",
+                success: function (orders) {
+                    var rows = "";
+                    $.each(orders, function (index, order) {
+                        // добавляем полученные элементы в таблицу
+                        if (order.soldOut = false) {
+
+                            return;
+                        }
+
+                    })
+                }
+            });
+        }
+
         // Получение всех пользователей
         function GetUsers() {
             $.ajax({
@@ -294,7 +441,7 @@
                 "<a href='' class='product'>" +
                 "<div class='product-main'>" +
                 "<div class='product-photo'>" +
-                "<img src='CSS/Images/example.png' alt='Фото отсутствует'>" +
+                "<img src='../images/Товары/" + orderobject.image +"' alt='Фото отсутствует'>" +
                 //"<img src=" + orderobject.image + " alt='Фото отсутствует'>" +
                 "</div>" +
                 "<div class='product-text'>" +
@@ -319,7 +466,7 @@
                 "</div>" +
                 "<div class='product-buttons-wrap'>" +
                 "<div class='buttons'>" +
-                "<span class='button to-cart'>В корзину</span>" +
+                "<span class='button to-cart' onclick='AddToCart(" + orderobject.objectId + ")' >В корзину</span>" +
                 "</div>" +
                 " </div>" +
                 "</div>" +
@@ -346,6 +493,93 @@
 
         // загрузка пользователей
         GetUsers();
+    </script>
+
+
+    <script>
+        
+        //Выход из профиля 
+        function LogOff() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/Account/LogOff", true); //http://localhost:13807
+
+            xmlhttp.onreadystatechange = function () {
+                document.getElementById("msgAuth").innerHTML = "Вы гость."
+                //document.getElementById("loginButton").innerHTML = "<a class='btn btn-outline' href='#' data-toggle='modal' data-target='#autorizModal'>Войти</a>";
+            }
+            xmlhttp.send();
+        }
+
+        //function LogIN() {
+        //    ParseResponseMsg();
+        //    GetCurrentUser();
+        //}
+
+        // Обработка клика по кнопке
+        //document.getElementById("loginBtn").addEventListener("click", LogIN);
+        document.getElementById("loginOut").addEventListener("click", LogOff);
+        
+        function GetCurrentUser() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/Account/isAuthenticated", true);
+            xmlhttp.onreadystatechange = function () {
+                var myObj = "";
+                myObj = xmlhttp.responseText != "" ? JSON.parse(xmlhttp.responseText) : {};
+                document.getElementById("msgAuth").innerHTML = myObj.message;
+            }
+            xmlhttp.send();
+        }
+        function GetCurrentId() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/Account/isAuthenticatedId", true);
+            xmlhttp.onreadystatechange = function () {
+                var myObj = "";
+                myObj = xmlhttp.responseText != "" ? JSON.parse(xmlhttp.responseText) : {};
+                document.getElementById("profileId").innerHTML = myObj.message;
+            }
+            xmlhttp.send();
+        }
+
+        function ParseResponseMsg() {
+            // Считывание данных с формы
+            email = document.getElementById("Email").value;
+            password = document.getElementById("Password").value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/api/Account/Login");
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.onreadystatechange = function () {
+                // Очистка контейнера вывода сообщений
+                document.getElementById("msgAuth").innerHTML = ""
+                var mydiv = document.getElementById('formError');
+                //while (mydiv.firstChild) {
+                //    mydiv.removeChild(mydiv.firstChild);
+                //}
+                // Обработка ответа от сервера
+                myObj = JSON.parse(this.responseText);
+                document.getElementById("msgAuth").innerHTML = myObj.message;
+                // Вывод сообщений об ошибках
+                //if (typeof myObj.error !== "undefined" && myObj.error.length > 0) {
+                //    for (var i = 0; i < myObj.error.length; i++) {
+                //        var ul = document.getElementsByTagName("ul");
+                //        var li = document.createElement("li");
+                //        li.appendChild(document.createTextNode(myObj.error[i]));
+                //        ul[0].appendChild(li);
+                //    }
+                //}
+                document.getElementById("Password").value = "";
+
+            };
+            // Запрос на сервер
+            xmlhttp.send(JSON.stringify({
+                email: email,
+                password: password
+            }));
+        };
+
+        document.getElementById("loginBtn").addEventListener("click", ParseResponseMsg);
+
+        GetCurrentUser();
+        GetCurrentId();
     </script>
 </body>
 </html>
